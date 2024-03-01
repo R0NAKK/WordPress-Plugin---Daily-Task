@@ -6,7 +6,7 @@ Version: 1.0
 Author: Your Name
 */
 
-// Create custom post type for daily tasks
+//  Daily tasks custom post type
 function create_daily_tasks_post_type() {
     register_post_type( 'daily_task',
         array(
@@ -23,7 +23,7 @@ function create_daily_tasks_post_type() {
 }
 add_action( 'init', 'create_daily_tasks_post_type' );
 
-// Add Daily Tasks widget to the dashboard
+// To Add Daily Tasks widget to the dashboard
 function add_daily_tasks_dashboard_widget() {
     wp_add_dashboard_widget(
         'daily_tasks_widget',
@@ -33,7 +33,7 @@ function add_daily_tasks_dashboard_widget() {
 }
 add_action( 'wp_dashboard_setup', 'add_daily_tasks_dashboard_widget' );
 
-// Display Daily Tasks widget content
+// Display Daily Tasks widget
 function display_daily_tasks_dashboard_widget() {
     $tasks = get_posts( array(
         'post_type' => 'daily_task',
@@ -59,7 +59,7 @@ function display_daily_tasks_dashboard_widget() {
     }
 }
 
-// Add custom meta box for task status dropdown
+// For task status dropdown
 function add_task_status_meta_box() {
     add_meta_box(
         'task_status_meta_box',
@@ -72,7 +72,7 @@ function add_task_status_meta_box() {
 }
 add_action( 'add_meta_boxes', 'add_task_status_meta_box' );
 
-// Render task status dropdown
+// To Render task status
 function render_task_status_meta_box( $post ) {
     $task_status = get_post_meta( $post->ID, 'task_status', true );
     ?>
@@ -85,7 +85,7 @@ function render_task_status_meta_box( $post ) {
 <?php
 }
 
-// Save task status when post is saved
+// Task status when post is saved
 function save_task_status( $post_id ) {
     if ( isset( $_POST['task_status'] ) ) {
         update_post_meta( $post_id, 'task_status', sanitize_text_field( $_POST['task_status'] ) );
